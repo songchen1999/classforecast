@@ -1,11 +1,12 @@
-import re, requests
+import re
+import requests
 from lxml import etree
 import logging
 
-#Author Email: yiyangl6@asu.edu
+# Author Email: yiyangl6@asu.edu
 
 headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
 }
 
 INFO_NOT_AVAILABLE = "Info currently not available"
@@ -15,9 +16,10 @@ tagFeedBackList = []
 ratingList = []
 takeAgainList = []
 
+
 class RateMyProfAPI:
 
-    #school id 45 = Arizona State University, the ID is initialized to 45 if not set upon usage.
+    # school id 45 = Arizona State University, the ID is initialized to 45 if not set upon usage.
     def __init__(self, schoolId=45, teacher="staff"):
         global teacherList
         if teacher != "staff":
@@ -46,7 +48,7 @@ class RateMyProfAPI:
         """
 
         global tagFeedBackList, ratingList, takeAgainList
-        #If professor showed as "staff"
+        # If professor showed as "staff"
         if self.teacherName == "":
             self.rating = INFO_NOT_AVAILABLE
             self.takeAgain = INFO_NOT_AVAILABLE
@@ -59,31 +61,44 @@ class RateMyProfAPI:
             return
 
         if self.index == -1:
-            #making request to the RMP page
+            # making request to the RMP page
             url = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&" \
-                  "queryBy=teacherName&schoolName=Arizona+State+University&schoolID=%s&query=" % self.schoolId + self.teacherName
+                  "queryBy=teacherName&schoolName=University+of+Massachusetts+-+Amherst&schoolID=%s&query=" % self.schoolId + self.teacherName
 
             page = requests.get(url=url, headers=headers)
+
             self.pageData = page.text
-            pageDataTemp = re.findall(r'ShowRatings\.jsp\?tid=\d+', self.pageData)
+
+            pageDataTemp = re.findall(
+                r'ShowRatings\.jsp\?tid=\d+', self.pageData)
+
             if len(pageDataTemp) > 0:
-                pageDataTemp = re.findall(r'ShowRatings\.jsp\?tid=\d+', self.pageData)[0]
+                pageDataTemp = re.findall(
+                    r'ShowRatings\.jsp\?tid=\d+', self.pageData)[0]
                 self.finalUrl = "https://www.ratemyprofessors.com/" + pageDataTemp
+
                 self.tagFeedBack = []
+
                 # Get tags
                 page = requests.get(self.finalUrl)
                 t = etree.HTML(page.text)
-                tags = str(t.xpath('//*[@id="mainContent"]/div[1]/div[3]/div[2]/div[2]/span/text()'))
+
+                tags = str(
+                    t.xpath('//*[@id="mainContent"]/div[1]/div[3]/div[2]/div[2]/span/text()'))
                 tagList = re.findall(r'\' (.*?) \'', tags)
+
                 if len(tagList) == 0:
                     self.tagFeedBack = []
                 else:
                     self.tagFeedBack = tagList
 
                 # Get rating
-                self.rating = str(t.xpath('//*[@id="mainContent"]/div[1]/div[3]/div[1]/div/div[1]/div/div/div/text()'))
+                self.rating = str(t.xpath(
+                    '//*[@id="mainContent"]/div[1]/div[3]/div[1]/div/div[1]/div/div/div/text()'))
+                print(self.rating)
                 if re.match(r'.*?N/A', self.rating):
                     self.rating = INFO_NOT_AVAILABLE
+                    print("s")
                 else:
                     try:
                         self.rating = re.findall(r'\d\.\d', self.rating)[0]
