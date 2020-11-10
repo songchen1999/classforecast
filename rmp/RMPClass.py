@@ -2,6 +2,7 @@ import re
 import requests
 from lxml import etree
 import logging
+import ast
 
 # Author Email: yiyangl6@asu.edu
 
@@ -20,7 +21,7 @@ takeAgainList = []
 class RateMyProfAPI:
 
     # school id 45 = Arizona State University, the ID is initialized to 45 if not set upon usage.
-    def __init__(self, schoolId=45, teacher="staff"):
+    def __init__(self, teacher="staff"):
         global teacherList
         if teacher != "staff":
             teacher = str(teacher).replace(" ", "+")
@@ -35,7 +36,7 @@ class RateMyProfAPI:
         self.teacherName = teacher
         self.index = -1
 
-        self.schoolId = schoolId
+        self.schoolId = 1513
 
         try:
             self.index = teacherList.index(self.teacherName)
@@ -82,10 +83,11 @@ class RateMyProfAPI:
                 # Get tags
                 page = requests.get(self.finalUrl)
                 t = etree.HTML(page.text)
-
                 tags = str(
-                    t.xpath('//*[@id="mainContent"]/div[1]/div[3]/div[2]/div[2]/span/text()'))
-                tagList = re.findall(r'\' (.*?) \'', tags)
+                    t.xpath(
+                        '/html/body/div[2]/div/div/div[3]/div[1]/div[1]/div[5]/div[2]/span/text()')
+                )
+                tagList = ast.literal_eval(tags)
 
                 if len(tagList) == 0:
                     self.tagFeedBack = []
@@ -94,8 +96,8 @@ class RateMyProfAPI:
 
                 # Get rating
                 self.rating = str(t.xpath(
-                    '//*[@id="mainContent"]/div[1]/div[3]/div[1]/div/div[1]/div/div/div/text()'))
-                print(self.rating)
+                    '/html/body/div[2]/div/div/div[3]/div[1]/div[1]/div[1]/div[1]/div/div[1]/text()'))
+
                 if re.match(r'.*?N/A', self.rating):
                     self.rating = INFO_NOT_AVAILABLE
                     print("s")
@@ -107,7 +109,7 @@ class RateMyProfAPI:
 
                 # Get "Would Take Again" Percentage
                 self.takeAgain = str(
-                    t.xpath('//*[@id="mainContent"]/div[1]/div[3]/div[1]/div/div[2]/div[1]/div/text()'))
+                    t.xpath('/html/body/div[2]/div/div/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/text()'))
                 if re.match(r'.*?N/A', self.takeAgain):
                     self.takeAgain = INFO_NOT_AVAILABLE
                 else:

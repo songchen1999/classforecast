@@ -1,4 +1,7 @@
 from RMPClass import RateMyProfAPI
-aapi = RateMyProfAPI(schoolId=1513, teacher="marius minea")
+aapi = RateMyProfAPI(teacher="david fisher")
 aapi.retrieveRMPInfo()
 print(aapi.getRMPInfo())
+print(aapi.getWouldTakeAgain())
+print(aapi.getTags())
+print(aapi.getFirstTag())
