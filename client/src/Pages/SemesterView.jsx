@@ -1,8 +1,6 @@
-import { Tabs } from 'antd';
 import React from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import TabPane from './tabs';
-import Demo from './tabs';
+import Mtab from '../Components/mtabs';
 
 export class SemesterView extends React.Component {
   state = {};
@@ -10,11 +8,10 @@ export class SemesterView extends React.Component {
   
   render() {
     return (
-      <div>
-        <h2>SemesterView</h2>
-        <Demo />
-
-        
+      <div style={{display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',}}>
+        <Mtab/>
       </div>
     
     );
