@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import Mtab from '../Components/course';
+import Mtab from '../Components/courseInfo';
 
 export class CourseView extends React.Component {
   state = {};
