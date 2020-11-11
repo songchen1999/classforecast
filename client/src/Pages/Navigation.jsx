@@ -1,5 +1,8 @@
 import React from 'react';
 import '../App.css';
+import {AppBar, Toolbar, Typography} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
+import {Home} from '@material-ui/icons';
 
 import {Link} from 'react-router-dom';
 
@@ -10,20 +13,16 @@ function Nav() {
   };
 
   return (
-    <nav>
-      <ul className="nav-links">
+    <AppBar position="static">
+      <Toolbar>
         <Link to="/" style={navStyle}>
-          {' '}
-          <li>Home</li>
+          <IconButton edge="start" color="inherit" aria-label="home">
+            <Home fontSize="large" />
+          </IconButton>
         </Link>
-        <Link to="/semester" style={navStyle}>
-          <li>Semester</li>
-        </Link>
-        <Link to="/courses" style={navStyle}>
-          <li>Courses</li>
-        </Link>
-      </ul>
-    </nav>
+        <Typography style={{fontSize: '25px'}}>ClassForecast</Typography>
+      </Toolbar>
+    </AppBar>
   );
 }
 
