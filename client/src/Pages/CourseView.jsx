@@ -45,7 +45,7 @@ export class CourseView extends React.Component {
   
             <tr>
               <td>Course Description</td>
-              <td>Suspendisse ullamcorper vulputate hendrerit. Duis vestibulum convallis risus efficitur varius. Pellentesque tempor sem at risus vehicula porta. Proin arcu urna, eleifend quis orci sit amet, condimentum condimentum erat. Praesent dolor risus, venenatis eu lectus at, elementum tempus nunc. Fusce vitae lectus nec ligula accumsan mattis porttitor sit amet neque. Sed vel placerat lorem.</td>
+              <td>An Intro to CompSci.</td>
             </tr>
 
           </table>
