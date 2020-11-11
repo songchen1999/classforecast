@@ -171,13 +171,12 @@ for course in eight_hundred_level_courses:
     print(course.getCourse())
 
 
-print("\n")
 # CICS Courses
 cics = all_classes[0].findAll("table")[0].table.findAll("tr")
 itercics = iter(cics)
 next(itercics)
 cics_courses = []
-
+print("\n")
 for single_class in itercics:
     if(single_class.get("valign") == None):
         class_name = single_class.td.text
