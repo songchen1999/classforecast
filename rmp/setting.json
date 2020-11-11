@@ -1,0 +1,4 @@
+"python.linting.pylintArgs": [
+    "--disable=C",
+    "--extension-pkg-whitelist=lxml"
+]
