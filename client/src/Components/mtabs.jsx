@@ -85,6 +85,12 @@ export default function SimpleTabs() {
   {number:'501', instructors: 'David Barrington', descrip: 'Formal Language Theory', credit: 3},
   {number:'501', instructors: 'David Barrington', descrip: 'Formal Language Theory', credit: 3},
   {number:'501', instructors: 'David Barrington', descrip: 'Formal Language Theory', credit: 3}];
+  const others = [
+  {number:'305', instructors: 'Mark Zurk', descrip: 'Social Issues in Computing', credit: 3},
+  {number:'305', instructors: 'Mark Zurk', descrip: 'Social Issues in Computing', credit: 3},
+  {number:'305', instructors: 'Mark Zurk', descrip: 'Social Issues in Computing', credit: 3},
+  {number:'305', instructors: 'Mark Zurk', descrip: 'Social Issues in Computing', credit: 3},
+  {number:'305', instructors: 'Mark Zurk', descrip: 'Social Issues in Computing', credit: 3}];
 
   return (
     <div className={classes.root}>
@@ -93,8 +99,9 @@ export default function SimpleTabs() {
           <Tab label="100" {...a11yProps(0)} />
           <Tab label="200" {...a11yProps(1)} />
           <Tab label="300" {...a11yProps(2)} />
-          <Tab label="400" {...a11yProps(2)} />
-          <Tab label="500+" {...a11yProps(2)} />
+          <Tab label="400" {...a11yProps(3)} />
+          <Tab label="500+" {...a11yProps(4)} />
+          <Tab label="CICS & Info" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
@@ -122,6 +129,11 @@ export default function SimpleTabs() {
       <div style = {{display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',}}><MTable rows={five}/></div>
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+      <div style = {{display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',}}><MTable rows={others}/></div>
       </TabPanel>
     </div>
   );
