@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import {AppBar, Toolbar, Typography} from '@material-ui/core';
+import {Toolbar, Typography} from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
 import {IconButton} from '@material-ui/core';
 import {Home} from '@material-ui/icons';
 
@@ -13,8 +14,8 @@ function Nav() {
   };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <AppBar position="static" style={{width: '100%'}} elevation={0}>
+      <Toolbar style={{width: '100%'}}>
         <Link to="/" style={navStyle}>
           <IconButton edge="start" color="inherit" aria-label="home">
             <Home fontSize="large" />

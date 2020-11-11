@@ -8,21 +8,23 @@ import Nav from './Pages/Navigation';
 function App() {
   return (
     <div className="App">
-      <div style={{ marginLeft:'20%',marginRight:'20%',
-    alignItems: 'center',
-    justifyContent: 'center'}}>
       <Router>
         <Nav />
-        
-        <Switch>
-          <Route exact path="/" component={HomeView} />
-          <Route path="/semester" component={SemesterView} />
-          <Route path="/courses" component={CourseView} />
-        </Switch>
-       
-        
+        <div
+          style={{
+            marginLeft: '20%',
+            marginRight: '20%',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Switch>
+            <Route exact path="/" component={HomeView} />
+            <Route path="/semester" component={SemesterView} />
+            <Route path="/courses" component={CourseView} />
+          </Switch>
+        </div>
       </Router>
-      </div>
     </div>
   );
 }

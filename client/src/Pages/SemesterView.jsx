@@ -5,18 +5,19 @@ import Mtab from '../Components/mtabs';
 export class SemesterView extends React.Component {
   state = {};
 
-  
   render() {
     return (
-      <div style={{display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',}}>
-        <Mtab/>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Mtab />
       </div>
-    
     );
   }
 }
 
 export default SemesterView;
-
