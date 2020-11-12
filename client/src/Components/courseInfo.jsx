@@ -34,13 +34,17 @@ function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-export default function SimpleList() {
+export default function SimpleList(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const text = {
+    color: "white"
+};
 
   return (
     <div className={classes.root}>
@@ -79,7 +83,7 @@ export default function SimpleList() {
         <Collapse in={open} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
             <ListItem button className={classes.nested}>
-                <ListItemText primary="COMPSCI 121 provides an introduction to problem solving and computer programming using the programming language Java. The course teaches how real-world problems can be solved computationally using the object-oriented metaphor that underlies Java. Concepts and techniques covered include data types, expressions, objects, methods, top-down program design, program testing and debugging, state representation, interactive programs, data abstraction, conditionals, iteration, interfaces, inheritance, polymorphism, arrays, graphics, and GUIs. No previous programming experience is required; however, this course is intended for Computer Science majors or those who plan on applying to the major. Non-majors are strongly encouraged to take one of our programming courses designed for non-majors. Use of a laptop computer on which you can install software is required. Prerequisite: R1 (or a score of 20 or higher on the math placement test Part A), or one of the following courses: MATH 101&102 or MATH 104 or MATH 127 or MATH 128 or MATH 131 or MATH 132. 4 credits." />
+                <ListItemText secondaryTypographyProps={{ style: text }} secondary="COMPSCI 121 provides an introduction to problem solving and computer programming using the programming language Java. The course teaches how real-world problems can be solved computationally using the object-oriented metaphor that underlies Java. Concepts and techniques covered include data types, expressions, objects, methods, top-down program design, program testing and debugging, state representation, interactive programs, data abstraction, conditionals, iteration, interfaces, inheritance, polymorphism, arrays, graphics, and GUIs. No previous programming experience is required; however, this course is intended for Computer Science majors or those who plan on applying to the major. Non-majors are strongly encouraged to take one of our programming courses designed for non-majors. Use of a laptop computer on which you can install software is required. Prerequisite: R1 (or a score of 20 or higher on the math placement test Part A), or one of the following courses: MATH 101&102 or MATH 104 or MATH 127 or MATH 128 or MATH 131 or MATH 132. 4 credits." />
             </ListItem>
         </List>
         </Collapse>
