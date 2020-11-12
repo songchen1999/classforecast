@@ -22,7 +22,7 @@ export class HomeView extends React.Component {
           justify="center"
         >
           <Grid item lg="3" alignItems="center">
-            <Card style={{maxWidth: '500px', maxHeight: '300px'}} elevation="2">
+            <Card style={{maxWidth: '500px', maxHeight: '300px'}} elevation="2" onClick={()=>{this.props.history.push("/semester");}}>
               <CardContent>
                 <Typography style={{fontSize: '18px'}}>Spring 2020</Typography>
               </CardContent>
