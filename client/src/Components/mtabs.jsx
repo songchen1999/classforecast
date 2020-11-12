@@ -7,6 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MTable from './mtable';
+import Modal from './modal';
+import Course from './courseInfo';
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -267,7 +269,7 @@ export default function SimpleTabs() {
           <Tab label="CICS & Info" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <Modal col={<TabPanel value={value} index={0}>
         <div
           style={{
             display: 'flex',
@@ -277,7 +279,8 @@ export default function SimpleTabs() {
         >
           <MTable rows={one} />
         </div>
-      </TabPanel>
+      </TabPanel>} show={<Course/>}/>
+      
       <TabPanel value={value} index={1}>
         <div
           style={{
