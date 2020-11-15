@@ -1,16 +1,7 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
-
-from flask import Flask, request
-
-
 import json
 from easydict import EasyDict as edict
-
-app = Flask(__name__)
-
-# Each class found is made into a Course
-
 
 class Course:
     def __init__(self, name, number, title, credits, semester):
@@ -25,8 +16,7 @@ class Course:
                "\nCredits: " + self.credits + ", Offered: " + self.semester)
 
 
-@app.route('/course-offering', methods={"GET"})
-def return_offering():
+def offering():
     # URL of Course Offering Plan
     my_url = 'https://www.cics.umass.edu/content/course-offering-plan'
 
@@ -264,5 +254,3 @@ def return_offering():
     return data
 
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)  # run app in debug mode on port 5000

@@ -139,7 +139,6 @@ class RateMyProfAPI:
 
         if self.rating == INFO_NOT_AVAILABLE:
             return INFO_NOT_AVAILABLE
-
         return self.rating + "/5.0"
 
     def getTags(self):
