@@ -6,7 +6,7 @@ import json
 from easydict import EasyDict as edict
 from OfferingPlan import offering as offering
 from RMPClass import RateMyProfAPI
-
+from CourseDescriptions import descriptions as descriptions
 
 app = Flask(__name__)
 CORS(app)
@@ -30,16 +30,21 @@ class Course:
 def return_shit():
     return offering()
 
-@app.route('/professor',methods={"GET"})
+
+@app.route('/professor', methods={"GET"})
 def return_staff():
-    professor = "david fisher";
+    professor = "david fisher"
     name = request.args.get('name')
-    if name!=None:
+    if name != None:
         professor = name
     aapi = RateMyProfAPI(teacher=professor)
     aapi.retrieveRMPInfo()
     return(aapi.getRMPInfo())
 
+
+@app.route('/course-description', methods={"GET"})
+def return_description():
+    return descriptions()
 
 
 if __name__ == '__main__':
