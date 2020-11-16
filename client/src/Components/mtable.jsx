@@ -14,18 +14,6 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(number, instructors, descrip, credit) {
-  return { number, instructors, descrip, credit};
-}
-
-const rowss = [
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-];
-
 export default function BasicTable({rows}) {
   const classes = useStyles();
 
@@ -35,18 +23,18 @@ export default function BasicTable({rows}) {
         <TableHead>
           <TableRow>
             <TableCell align="left">Course Number</TableCell>
-            <TableCell align="left">Instructors</TableCell>
             <TableCell align="left">Description</TableCell>
             <TableCell align="left">Credits</TableCell>
+            <TableCell align="left">Availability</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
               <TableCell align="left">{row.number}</TableCell>
-              <TableCell align="left">{row.instructors}</TableCell>
-              <TableCell align="left">{row.descrip}</TableCell>
-              <TableCell align="left">{row.credit}</TableCell>
+              <TableCell align="left">{row.title}</TableCell>
+              <TableCell align="left">{row.credits}</TableCell>
+              <TableCell align="left">{row.semester}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -50,23 +50,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   
-  const [courses, setCourses] = React.useState([]);
-
-  componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-      .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
-      })
-  }
-
-
- 
-
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -291,7 +278,7 @@ export default function SimpleTabs() {
             justifyContent: 'center',
           }}
         >
-          <MTable rows={one} />
+          <MTable rows={props.courses['100']} />
         </div>
       </TabPanel>} show={<Course/>}/>
       
@@ -303,7 +290,7 @@ export default function SimpleTabs() {
             justifyContent: 'center',
           }}
         >
-          <MTable rows={two} />
+          <MTable rows={props.courses['200']} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -314,7 +301,7 @@ export default function SimpleTabs() {
             justifyContent: 'center',
           }}
         >
-          <MTable rows={three} />
+          <MTable rows={props.courses['300']} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={3}>
@@ -325,7 +312,7 @@ export default function SimpleTabs() {
             justifyContent: 'center',
           }}
         >
-          <MTable rows={four} />
+          <MTable rows={props.courses['400']} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={4}>
@@ -336,7 +323,7 @@ export default function SimpleTabs() {
             justifyContent: 'center',
           }}
         >
-          <MTable rows={five} />
+          <MTable rows={props.courses['500+']} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={5}>
@@ -347,7 +334,7 @@ export default function SimpleTabs() {
             justifyContent: 'center',
           }}
         >
-          <MTable rows={others} />
+          <MTable rows={props.courses['CICS']} />
         </div>
       </TabPanel>
     </div>
