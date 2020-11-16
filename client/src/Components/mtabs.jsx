@@ -53,6 +53,20 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  
+  const [courses, setCourses] = React.useState([]);
+
+  componentDidMount() {
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+      })
+  }
+
+
+ 
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
