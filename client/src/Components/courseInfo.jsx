@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import axios from 'axios';
 
 const Button = ()=>{
     return <div>13</div>
@@ -37,6 +38,16 @@ function ListItemLink(props) {
 export default function SimpleList(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  const [courses,setCourses] = React.useState({});
+
+  useEffect(()=>{
+    axios.get(`http://127.0.0.1:5000/course-description`)
+      .then(res => {
+        const courses = res.data;
+        setCourses(courses);
+      })
+  })
 
   const handleClick = () => {
     setOpen(!open);

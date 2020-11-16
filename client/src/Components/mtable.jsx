@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Modal from '../Components/modal'
+import Info from '../Components/courseInfo'
 
 const useStyles = makeStyles({
   table: {
@@ -23,7 +25,7 @@ export default function BasicTable({rows}) {
         <TableHead>
           <TableRow>
             <TableCell align="left">Course Number</TableCell>
-            <TableCell align="left">Description</TableCell>
+            <TableCell align="left">Title</TableCell>
             <TableCell align="left">Credits</TableCell>
             <TableCell align="left">Availability</TableCell>
           </TableRow>
@@ -31,10 +33,10 @@ export default function BasicTable({rows}) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell align="left">{row.number}</TableCell>
-              <TableCell align="left">{row.title}</TableCell>
-              <TableCell align="left">{row.credits}</TableCell>
-              <TableCell align="left">{row.semester}</TableCell>
+              <TableCell align="left">{<Modal col={row.number} show={<Info/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.title} show={<Info/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.credits} show={<Info/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.semester} show={<Info/>}/>}</TableCell>
             </TableRow>
           ))}
         </TableBody>
