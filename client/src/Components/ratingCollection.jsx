@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,22 +12,71 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import axios from 'axios';
 import Loading from './loading';
 
+export default function RatingCollection(props){
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          width: '100%',
+          maxWidth: 360,
+          //backgroundColor: theme.palette.background.paper,
+        },
+        nested: {
+          //paddingLeft: theme.spacing(4),
+        },
+        header:{
+          textTransform: 'uppercase',
+          fontWeight: 'bold',
+          fontSize: 'large',
+        }
+      }));
+      const text = {
+        color: "white"
+        };
+    const classes = useStyles();
 
-export default function ratingCollection(props){
-
- <List component="nav" style={{flexDirection:'column', alignItems:'flex-start'}} disablePadding>
+    const [ratings,setRatings] = useState([]);
+    useEffect(
+    ()=>{   
            
- {props.courses["instructor(s)"].split(',').map(
-   e=>{
+            const result = [];
+            console.log(props.courses['instructor(s)'].split(', '));
+            props.courses['instructor(s)'].split(', ').forEach( 
+                async (e)=>{
+                    axios.get(`http://127.0.0.1:5000/professor`,{params: {'name':e}})
+                    .then(res => {  
+                                    
+                                    const rate = res.data;
+                                    console.log(rate);
+                                    
+                                    const dup = ratings.map(e=>e);
+                                    dup.push(rate);
+                                    result.push(rate);
+                                    setRatings(dup);
+                                }
+                         )
+                                                    
+                    }
+           )
+        },
+        
+        [])
+
+        /*
+        if(ratings.length!=props.courses['instructor(s)'].split(', ').length){
+            return <div>loading</div>
+        }
+        */
+    return (
+    
+    
+    <List component="nav" style={{flexDirection:'column', alignItems:'flex-start'}} disablePadding>
+           {props.courses["instructor(s)"].split(',').map((e,i)=>{
      return ( 
      <ListItem className={classes.nested}> 
        <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {e}  />
-       <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {1}  />
+       <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {ratings[i]}  />
      </ListItem>
      )
    }
  )}
- 
-
-</List>
+ </List>)
 }

@@ -11,6 +11,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import axios from 'axios';
 import Loading from './loading';
+import RC from './ratingCollection';
 
 const Button = ()=>{
     return <div>13</div>
@@ -104,21 +105,7 @@ export default function SimpleList(props) {
           {open1 ?  <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open1} timeout="auto" unmountOnExit>
-         <List component="nav" style={{flexDirection:'column', alignItems:'flex-start'}} disablePadding>
-           
-                {courses["instructor(s)"].split(',').map(
-                  e=>{
-                    return ( 
-                    <ListItem className={classes.nested}> 
-                      <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {e}  />
-                      <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {1}  />
-                    </ListItem>
-                    )
-                  }
-                )}
-                
-            
-        </List>
+         <RC courses={courses}/>
         </Collapse>
         <Divider/>
         <ListItem style={{justifyContent:'space-around'}}>
