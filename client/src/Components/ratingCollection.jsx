@@ -36,26 +36,29 @@ export default function RatingCollection(props){
     const [ratings,setRatings] = useState([]);
     useEffect(
     ()=>{   
-           
-            const result = [];
+
             console.log(props.courses['instructor(s)'].split(', '));
-            props.courses['instructor(s)'].split(', ').forEach( 
-                async (e)=>{
-                    axios.get(`http://127.0.0.1:5000/professor`,{params: {'name':e}})
+            //const result = [];
+            const arr = props.courses['instructor(s)'].split(', ');
+            for (let i=0; i<arr.length; i++){
+              axios.get(`http://127.0.0.1:5000/professor`,{params: {'name':arr[i]}})
                     .then(res => {  
-                                    
+                                   
                                     const rate = res.data;
                                     console.log(rate);
                                     
                                     const dup = ratings.map(e=>e);
-                                    dup.push(rate);
-                                    result.push(rate);
+                                    
+                                    dup[i]=rate;
                                     setRatings(dup);
+                                   
+                                
                                 }
                          )
-                                                    
-                    }
-           )
+            }
+
+
+            
         },
         
         [])
@@ -71,9 +74,9 @@ export default function RatingCollection(props){
     <List component="nav" style={{flexDirection:'column', alignItems:'flex-start'}} disablePadding>
            {props.courses["instructor(s)"].split(',').map((e,i)=>{
      return ( 
-     <ListItem className={classes.nested}> 
+     <ListItem className={classes.nested} > 
        <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {e}  />
-       <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {ratings[i]}  />
+       <ListItemText style={{align:'right'}} secondaryTypographyProps={{ style: text }} secondary= {ratings[i]}  />
      </ListItem>
      )
    }
