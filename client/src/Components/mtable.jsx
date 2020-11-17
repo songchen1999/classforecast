@@ -33,10 +33,10 @@ export default function BasicTable({rows}) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell align="left">{<Modal col={row.number} show={<Info/>}/>}</TableCell>
-              <TableCell align="left">{<Modal col={row.title} show={<Info/>}/>}</TableCell>
-              <TableCell align="left">{<Modal col={row.credits} show={<Info/>}/>}</TableCell>
-              <TableCell align="left">{<Modal col={row.semester} show={<Info/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.number} show={<Info id = {row.number}/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.title} show={<Info id = {row.number}/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.credits} show={<Info id = {row.number}/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.semester} show={<Info id = {row.number}/>}/>}</TableCell>
             </TableRow>
           ))}
         </TableBody>
