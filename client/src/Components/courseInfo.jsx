@@ -115,11 +115,6 @@ export default function SimpleList(props) {
           <RC courses={courses} />
         </Collapse>
         <Divider />
-        <ListItem style={{justifyContent: 'space-around'}}>
-          <ListItemText primary="Rating" />
-          <ListItemText primary="4.3" style={{textAlign: 'right'}} />
-        </ListItem>
-        <Divider />
         <ListItem button onClick={handleClick}>
           <ListItemText primary="Course Description" />
           {open ? <ExpandLess /> : <ExpandMore />}
