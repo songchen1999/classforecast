@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'uppercase',
     fontWeight: 'bold',
     fontSize: 'large',
+    textAlign: 'center'
   },
 }));
 

@@ -75,7 +75,7 @@ export default function RatingCollection(props){
            {props.courses["instructor(s)"].split(',').map((e,i)=>{
      return ( 
      <ListItem className={classes.nested} > 
-       <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {e}  />
+       <ListItemText style={{align:'left'}} secondaryTypographyProps={{ style: text }} secondary= {e+'=>'}  />
        <ListItemText style={{align:'right'}} secondaryTypographyProps={{ style: text }} secondary= {ratings[i]}  />
      </ListItem>
      )
