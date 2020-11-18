@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -13,11 +13,11 @@ import axios from 'axios';
 import Loading from './loading';
 import RC from './ratingCollection';
 
-const Button = ()=>{
-    return <div>13</div>
-}
+const Button = () => {
+  return <div>13</div>;
+};
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
@@ -26,34 +26,31 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     //paddingLeft: theme.spacing(4),
   },
-  header:{
+  header: {
     textTransform: 'uppercase',
     fontWeight: 'bold',
     fontSize: 'large',
-  }
+  },
 }));
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-function filterS(id, arr){
+function filterS(id, arr) {
   let result = {};
-   arr.forEach(
-     (e)=>{
-       if(e.id==id){
-          result =  e;
-       } 
-     }
-   )
-   return result;
+  arr.forEach(e => {
+    if (e.id == id) {
+      result = e;
+    }
+  });
+  return result;
 }
 
-function rating(name){
-  return axios.get(`http://localhost:5000/professor`, {name})
-      .then(res => {
-        return res;
-      });
+function rating(name) {
+  return axios.get(`http://localhost:5000/professor`, {name}).then(res => {
+    return res;
+  });
 }
 
 export default function SimpleList(props) {
@@ -61,18 +58,15 @@ export default function SimpleList(props) {
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
 
-  const [courses,setCourses] = React.useState({});
+  const [courses, setCourses] = React.useState({});
 
-  useEffect(()=>{
-    axios.get(`http://127.0.0.1:5000/course-description`)
-      .then(res => {
-        const Courses = filterS(props.id,res.data.courses);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/course-description`).then(res => {
+      const Courses = filterS(props.id, res.data.courses);
 
-        setCourses(Courses);
-
-      })
-      
-  },[])
+      setCourses(Courses);
+    });
+  }, []);
 
   const handleClick = () => {
     setOpen(!open);
@@ -83,48 +77,63 @@ export default function SimpleList(props) {
   };
 
   const text = {
-    color: "white"
-};
+    color: 'white',
+  };
 
-  if(courses['id']==undefined){
-    return <Loading/>
+  if (courses['id'] == undefined) {
+    return <Loading />;
   }
 
   return (
     <div className={classes.root}>
-      <List component="nav" style={{flexDirection:'column'}} aria-label="course"
-      subheader={
-        <ListSubheader component="div" class id="nested-list-subheader" className={classes.header}>
-          <p className={classes.header}>{courses.title}</p>
-        </ListSubheader>
-      }
-      className={classes.root}
+      <List
+        component="nav"
+        style={{flexDirection: 'column'}}
+        aria-label="course"
+        subheader={
+          <ListSubheader
+            component="div"
+            class
+            id="nested-list-subheader"
+            className={classes.header}
+          >
+            <p className={classes.header}>{courses.title}</p>
+          </ListSubheader>
+        }
+        className={classes.root}
       >
-        <ListItem style={{justifyContent:'space-around'}} button onClick={handleClick1}>
+        <ListItem
+          style={{justifyContent: 'space-around'}}
+          button
+          onClick={handleClick1}
+        >
           <ListItemText primary="Professors and Ratings" />
-          {open1 ?  <ExpandLess /> : <ExpandMore />}
+          {open1 ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open1} timeout="auto" unmountOnExit>
-         <RC courses={courses}/>
+          <RC courses={courses} />
         </Collapse>
-        <Divider/>
-        <ListItem style={{justifyContent:'space-around'}}>
+        <Divider />
+        <ListItem style={{justifyContent: 'space-around'}}>
           <ListItemText primary="Rating" />
-          <ListItemText primary="4.3" style={{textAlign:'right'}}/>
+          <ListItemText primary="4.3" style={{textAlign: 'right'}} />
         </ListItem>
-        <Divider/>
+        <Divider />
         <ListItem button onClick={handleClick}>
-        <ListItemText primary="Course Description" />
-        {open ?  <ExpandLess /> : <ExpandMore />}
+          <ListItemText primary="Course Description" />
+          {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
-         <List component="div" disablePadding>
+          <List component="div" disablePadding>
             <ListItem button className={classes.nested}>
-                <ListItemText secondaryTypographyProps={{ style: text }} secondary= {courses.description} />
+              <ListItemText
+                secondaryTypographyProps={{style: text}}
+                secondary={courses.description}
+              />
             </ListItem>
-        </List>
+          </List>
         </Collapse>
-        </List>
+      </List>
     </div>
   );
 }
