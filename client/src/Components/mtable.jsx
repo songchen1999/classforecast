@@ -7,24 +7,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Modal from '../Components/modal'
+import Info from '../Components/courseInfo'
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
-
-function createData(number, instructors, descrip, credit) {
-  return { number, instructors, descrip, credit};
-}
-
-const rowss = [
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-  createData('121', 'Joe Chiu', "an introduction to computer science", 4),
-];
 
 export default function BasicTable({rows}) {
   const classes = useStyles();
@@ -35,18 +25,18 @@ export default function BasicTable({rows}) {
         <TableHead>
           <TableRow>
             <TableCell align="left">Course Number</TableCell>
-            <TableCell align="left">Instructors</TableCell>
-            <TableCell align="left">Description</TableCell>
+            <TableCell align="left">Title</TableCell>
             <TableCell align="left">Credits</TableCell>
+            <TableCell align="left">Availability</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell align="left">{row.number}</TableCell>
-              <TableCell align="left">{row.instructors}</TableCell>
-              <TableCell align="left">{row.descrip}</TableCell>
-              <TableCell align="left">{row.credit}</TableCell>
+              <TableCell align="left">{<Modal col={row.number} show={<Info id = {row.number}/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.title} show={<Info id = {row.number}/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.credits} show={<Info id = {row.number}/>}/>}</TableCell>
+              <TableCell align="left">{<Modal col={row.semester} show={<Info id = {row.number}/>}/>}</TableCell>
             </TableRow>
           ))}
         </TableBody>
